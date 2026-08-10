@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* ── Professional Medical Palette ────────────── */
+    --navy: #0c1a2e;
+    --navy-light: #162a46;
+    --med-blue: #0a5eb4;
+    --med-blue-2: #1170c7;
+    --sky: #3b9be0;
+    --sky-light: #d6eaf8;
+    --sky-pale: #eef6fc;
+    --hc-green: #1a8a5c;
+    --hc-green-lt: #d4efdf;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
+
+    /* ── Domain coding ──────────────────────────── */
+    --allo: #0a5eb4;
+    --allo-light: #d6eaf8;
+    --ayur: #1a8a5c;
+    --ayur-light: #d4efdf;
+    --homeo: #5b4a9e;
+    --homeo-light: #e8e4f4;
+  }
+}
+
+/* ── Utility classes ──────────────────────────────── */
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+}
+
+/* ── Subtle animations ────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .7;
+  }
+}
+
+/* Premium bezier curves for a smooth, trustworthy startup feel */
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slide-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scan-line {
+  animation: scan-line 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* Stagger children */
+.stagger>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger>*:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.stagger>*:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.stagger>*:nth-child(4) {
+  animation-delay: 240ms;
+}
+
+.stagger>*:nth-child(5) {
+  animation-delay: 320ms;
+}
+
+.stagger>*:nth-child(6) {
+  animation-delay: 400ms;
+}
+
+/* ── Domain badges ────────────────────────────────── */
+.badge-allopathy {
+  background: var(--allo-light);
+  color: var(--allo);
+  border: 1px solid #b4d4f0;
+}
+
+.badge-ayurveda {
+  background: var(--ayur-light);
+  color: var(--ayur);
+  border: 1px solid #a3d8bf;
+}
+
+.badge-homeopathy {
+  background: var(--homeo-light);
+  color: var(--homeo);
+  border: 1px solid #c5bede;
+}
+
+/* ── Severity badges ──────────────────────────────── */
+.severity-high {
+  background: #fde8e8;
+  color: #991b1b;
+  border: 1px solid #f5a3a3;
+}
+
+.severity-moderate {
+  background: #fef3cd;
+  color: #856404;
+  border: 1px solid #f5d97a;
+}
+
+.severity-low {
+  background: var(--sky-pale);
+  color: var(--med-blue);
+  border: 1px solid #a8ccee;
+}
+
+/* ── Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+<!-- commit-touch: 2026-08-10 09:20:00 -->
+
+<!-- commit-touch: 2026-08-18 18:20:00 -->
+
+<!-- commit-touch: 2026-08-26 17:00:00 -->
+
+<!-- commit-touch: 2026-08-30 13:30:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-10 09:20:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-18 18:20:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-26 17:00:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-30 13:30:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-10 09:20:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-18 18:20:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-26 17:00:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-30 13:30:00 -->
+
+<!-- commit-touch: shubhamsoni1234 2026-08-10 09:20:00 -->
