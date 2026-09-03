@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  # ── PostgreSQL Database ──────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: cura_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cura_db
+      POSTGRES_USER: cura_user
+      POSTGRES_PASSWORD: cura_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U cura_user -d cura_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Python FastAPI AI Microservice ───────────────────────────
+  ai-backend:
+    build:
+      context: ./ai-backend
+      dockerfile: Dockerfile
+    container_name: cura_fastapi
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://cura_user:cura_password@postgres:5432/cura_db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Next.js Frontend ─────────────────────────────────────────
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cura_nextjs
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://cura_user:cura_password@postgres:5432/cura_db
+      - AUTH_SECRET=${AUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+      - FASTAPI_URL=http://ai-backend:8000
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SMTP_FROM=${SMTP_FROM}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
+      - NODE_ENV=production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ai-backend:
+        condition: service_healthy
+    command: sh -c "npx prisma migrate deploy && node server.js"
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: cura_network

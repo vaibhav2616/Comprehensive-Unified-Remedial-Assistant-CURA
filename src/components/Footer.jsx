@@ -3,69 +3,77 @@ import Link from 'next/link';
 
 export default function Footer() {
     return (
-        <footer className="bg-white border-t border-[var(--gray-200)] mt-auto pt-16 pb-8">
+        <footer className="bg-[var(--surface)] text-[var(--text-secondary)] border-t border-[var(--border)] mt-auto pt-16 pb-10 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
 
                     <div className="col-span-1 md:col-span-1">
-                        <Link href="/" className="flex items-center space-x-2 mb-4">
-                            <div className="bg-[var(--med-blue)] p-1.5 rounded-lg">
+                        <Link href="/" className="flex items-center space-x-2.5 mb-4 group">
+                            <div className="p-1.5 rounded-xl shadow-sm transition-transform group-hover:scale-105" style={{ background: 'var(--accent-gradient)' }}>
                                 <HeartPulse className="h-5 w-5 text-white" />
                             </div>
-                            <span className="text-xl font-bold text-[var(--navy)]">CURA</span>
+                            <span className="text-xl font-extrabold tracking-tight text-[var(--text-primary)]">CURA</span>
                         </Link>
-                        <p className="text-sm text-[var(--gray-500)] leading-relaxed">
+                        <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                             Comprehensive Unified Remedial Assistant.
-                            Bridging modern medicine and traditional healing with clinical safety.
+                            Bridging modern Western medicine and traditional clinical systems with automated cross-domain safety.
                         </p>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold text-[var(--navy)] mb-4">Patient Services</h3>
-                        <ul className="space-y-3 text-sm text-[var(--gray-500)]">
-                            <li><Link href="/doctors" className="hover:text-[var(--med-blue)]">Find a Doctor</Link></li>
-                            <li><Link href="/prescription" className="hover:text-[var(--med-blue)]">Analyze Prescription</Link></li>
-                            <li><Link href="/dashboard/patient" className="hover:text-[var(--med-blue)]">Patient Portal</Link></li>
+                        <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--text-primary)] mb-4">Patient Services</h3>
+                        <ul className="space-y-2.5 text-xs text-[var(--text-muted)]">
+                            <li><Link href="/doctors" className="hover:text-[var(--primary)] transition">Find a Verified Doctor</Link></li>
+                            <li><Link href="/symptom-checker" className="hover:text-[var(--primary)] transition">Adaptive Symptom Survey</Link></li>
+                            <li><Link href="/prescription" className="hover:text-[var(--primary)] transition">Analyze Prescription</Link></li>
+                            <li><Link href="/dashboard/patient" className="hover:text-[var(--primary)] transition">Patient Health Portal</Link></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold text-[var(--navy)] mb-4">Provider Services</h3>
-                        <ul className="space-y-3 text-sm text-[var(--gray-500)]">
-                            <li><Link href="/dashboard/doctor" className="hover:text-[var(--med-blue)]">Doctor Portal</Link></li>
-                            <li><a href="#" className="hover:text-[var(--med-blue)]">Clinical Guidelines</a></li>
-                            <li><a href="#" className="hover:text-[var(--med-blue)]">Join Network</a></li>
+                        <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--text-primary)] mb-4">Clinician Services</h3>
+                        <ul className="space-y-2.5 text-xs text-[var(--text-muted)]">
+                            <li><Link href="/dashboard/doctor" className="hover:text-[var(--primary)] transition">Doctor Clinic Portal</Link></li>
+                            <li><Link href="/dashboard/doctor/approvals" className="hover:text-[var(--primary)] transition">Clinical Approvals Queue</Link></li>
+                            <li><Link href="/community" className="hover:text-[var(--primary)] transition">Practitioner Discussions</Link></li>
+                            <li><a href="#" className="hover:text-[var(--primary)] transition">Cross-Domain Guidelines</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold text-[var(--navy)] mb-4">Medical Safety</h3>
-                        <div className="space-y-4">
-                            <div className="flex items-center space-x-3 text-sm text-[var(--gray-600)]">
-                                <ShieldCheck className="h-4 w-4 text-[var(--hc-green)]" />
-                                <span>HIPAA Compliant</span>
+                        <h3 className="font-bold text-xs uppercase tracking-wider text-[var(--text-primary)] mb-4">Clinical Safety Standard</h3>
+                        <div className="space-y-3">
+                            <div className="flex items-center space-x-2.5 text-xs text-[var(--text-secondary)]">
+                                <ShieldCheck className="h-4 w-4 text-emerald-500 flex-shrink-0" />
+                                <span>HIPAA Compliant Data Architecture</span>
                             </div>
-                            <div className="flex items-center space-x-3 text-sm text-[var(--gray-600)]">
-                                <Stethoscope className="h-4 w-4 text-[var(--med-blue)]" />
-                                <span>Verified Providers</span>
+                            <div className="flex items-center space-x-2.5 text-xs text-[var(--text-secondary)]">
+                                <Stethoscope className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                                <span>Board-Certified Multidisciplinary Doctors</span>
                             </div>
-                            <div className="flex items-center space-x-3 text-sm text-[var(--gray-600)]">
-                                <FileCheck className="h-4 w-4 text-[var(--navy-light)]" />
-                                <span>Clinical Interaction Checks</span>
+                            <div className="flex items-center space-x-2.5 text-xs text-[var(--text-secondary)]">
+                                <FileCheck className="h-4 w-4 text-purple-500 flex-shrink-0" />
+                                <span>Automated Herb-Drug Interaction Matrix</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-[var(--gray-100)] flex flex-col md:flex-row justify-between items-center">
-                    <p className="text-sm text-[var(--gray-400)]">
-                        © 2026 CURA Healthcare. All rights reserved. Not intended for emergency care.
+                <div className="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-[var(--text-muted)]">
+                        © 2026 CURA Healthcare OS. All rights reserved. Intended for clinical decision support.
                     </p>
-                    <div className="flex space-x-2 mt-4 md:mt-0">
-                        <span className="w-3 h-3 rounded-full bg-[var(--allo)]"></span>
-                        <span className="w-3 h-3 rounded-full bg-[var(--ayur)]"></span>
-                        <span className="w-3 h-3 rounded-full bg-[var(--homeo)]"></span>
+                    <div className="flex items-center space-x-3 text-xs">
+                        <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                            <span className="w-2 h-2 rounded-full bg-blue-500"></span> Allopathy
+                        </span>
+                        <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Ayurveda
+                        </span>
+                        <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                            <span className="w-2 h-2 rounded-full bg-purple-500"></span> Homeopathy
+                        </span>
                     </div>
                 </div>
 
@@ -73,11 +81,3 @@ export default function Footer() {
         </footer>
     );
 }
-
-// commit-touch: 2026-08-10 18:30:00
-
-// commit-touch: shubhamsoni1234 2026-08-10 18:30:00
-
-// commit-touch: shubhamsoni1234 2026-08-10 18:30:00
-
-// commit-touch: shubhamsoni1234 2026-08-10 18:30:00

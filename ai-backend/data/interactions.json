@@ -1,0 +1,47 @@
+[
+    {
+        "drug1": "Aspirin",
+        "drug2": "Ginkgo Biloba",
+        "domain1": "Allopathy",
+        "domain2": "Ayurveda",
+        "severity": "HIGH",
+        "description": "Both Aspirin and Ginkgo Biloba have blood-thinning properties. Taking them together significantly increases the risk of severe bleeding and hemorrhage.",
+        "recommendation": "Avoid concurrent use. If necessary, monitor coagulation parameters closely."
+    },
+    {
+        "drug1": "Metformin",
+        "drug2": "Ashwagandha",
+        "domain1": "Allopathy",
+        "domain2": "Ayurveda",
+        "severity": "MODERATE",
+        "description": "Ashwagandha may lower blood glucose levels, which can enhance the effects of Metformin and cause hypoglycemia.",
+        "recommendation": "Monitor blood glucose levels frequently. Dose adjustments of Metformin may be required."
+    },
+    {
+        "drug1": "Levothyroxine",
+        "drug2": "Calcarea Carbonica",
+        "domain1": "Allopathy",
+        "domain2": "Homeopathy",
+        "severity": "LOW",
+        "description": "Potential interference with thyroid hormone balance. Clinical significance is not fully established.",
+        "recommendation": "Maintain a 4-hour gap between taking Levothyroxine and homeopathic remedies."
+    },
+    {
+        "drug1": "Warfarin",
+        "drug2": "Garlic",
+        "domain1": "Allopathy",
+        "domain2": "Ayurveda",
+        "severity": "HIGH",
+        "description": "Garlic supplements possess antiplatelet activity which can potentiate the anticoagulant effect of Warfarin.",
+        "recommendation": "Contraindicated. Do not use therapeutic doses of Garlic supplements while on Warfarin."
+    },
+    {
+        "drug1": "Sildenafil",
+        "drug2": "Yohimbe",
+        "domain1": "Allopathy",
+        "domain2": "Ayurveda",
+        "severity": "HIGH",
+        "description": "Both cause vasodilation. Combining them can lead to a dangerous drop in blood pressure and tachycardia.",
+        "recommendation": "Strictly contraindicated."
+    }
+]

@@ -1,0 +1,313 @@
+// This is your Prisma schema file for CURA production database
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Enums ──────────────────────────────────────────────────────────
+enum Role {
+  PATIENT
+  DOCTOR
+}
+
+enum MedicalDomain {
+  ALLOPATHY
+  AYURVEDA
+  HOMEOPATHY
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum PrescriptionStatus {
+  PENDING
+  ANALYZED
+  APPROVED
+  FLAGGED
+}
+
+enum PostStatus {
+  PENDING
+  APPROVED
+  FLAGGED
+  REMOVED
+}
+
+enum MetricStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ── Core User ───────────────────────────────────────────────────────
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String?   @unique
+  phone         String?   @unique
+  role          Role      @default(PATIENT)
+  emailVerified DateTime?
+  phoneVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Profile extensions
+  doctorProfile  Doctor?
+  patientProfile Patient?
+
+  // Activity
+  sentAppointments     Appointment[]    @relation("PatientAppointments")
+  receivedAppointments Appointment[]    @relation("DoctorAppointments")
+  prescriptions        Prescription[]   @relation("PatientPrescriptions")
+  reviewedRx           Prescription[]   @relation("DoctorPrescriptions")
+  communityPosts       CommunityPost[]
+  reviewsGiven         DoctorReview[]   @relation("ReviewAuthor")
+  reviewsReceived      DoctorReview[]   @relation("ReviewTarget")
+
+  otpTokens OtpToken[]
+  sessions  Session[]
+
+  @@map("users")
+}
+
+// ── OTP Token (for passwordless auth) ──────────────────────────────
+model OtpToken {
+  id         String   @id @default(cuid())
+  identifier String   // phone number or email
+  token      String
+  expires    DateTime
+  used       Boolean  @default(false)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([identifier])
+  @@map("otp_tokens")
+}
+
+// ── Session ─────────────────────────────────────────────────────────
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique @default(cuid())
+  expires   DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@map("sessions")
+}
+
+// ── Doctor Profile ───────────────────────────────────────────────────
+model Doctor {
+  id              String        @id @default(cuid())
+  userId          String        @unique
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  registrationNo  String        @unique
+  specialization  String[]      // ["Cardiologist", "General Physician"]
+  domains         MedicalDomain[]
+  experience      Int           // years
+  qualifications  String[]
+  hospital        String?
+  city            String
+  state           String
+  country         String        @default("India")
+  lat             Float?
+  lng             Float?
+
+  consultFee      Float         // INR
+  avgMedicineCost Float?        // estimated medicine cost per treatment
+
+  bio             String?
+  isVerified      Boolean       @default(false)
+  isAvailable     Boolean       @default(true)
+
+  // Analytics – computed from reviews
+  avgRating       Float?        @default(0)
+  totalReviews    Int           @default(0)
+  avgRecoveryDays Int?          // average recovery time
+  successRate     Float?        @default(0) // % of cases marked as recovered
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("doctors")
+}
+
+// ── Patient Profile ──────────────────────────────────────────────────
+model Patient {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  dob          DateTime?
+  bloodGroup   String?
+  height       Float?   // cm
+  weight       Float?   // kg
+  allergies    String[]
+  conditions   String[] // chronic conditions
+  emergencyContact String?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  metrics        PatientMetric[]
+  changeRequests ClinicalChangeRequest[]
+
+  @@map("patients")
+}
+
+// ── Patient Health Metrics (for progress charts) ─────────────────────
+model PatientMetric {
+  id         String       @id @default(cuid())
+  patientId  String
+  patient    Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  type       String       // "blood_pressure", "bp_diastolic", "blood_sugar", "weight", "oxygen", "heart_rate"
+  value      Float
+  unit       String       // mmHg, mg/dL, kg, %, bpm
+  status     MetricStatus @default(PENDING)
+  isApproved Boolean      @default(false)
+  doctorId   String?      // Optional specific doctor assigned to review
+  reviewedBy String?      // Doctor user ID who reviewed
+  reviewNote String?      // Doctor feedback on approval/rejection
+  reviewedAt DateTime?
+  recordedAt DateTime     @default(now())
+  notes      String?
+
+  @@index([patientId, type, recordedAt])
+  @@index([status])
+  @@map("patient_metrics")
+}
+
+// ── Clinical Factor & Medication Change Requests (Doctor Approval Gate) ────
+model ClinicalChangeRequest {
+  id             String       @id @default(cuid())
+  patientId      String
+  patient        Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  category       String       // "FACTOR" | "MEDICATION"
+  field          String       // "weight" | "height" | "bloodGroup" | "allergies" | "conditions" | "medication_update"
+  currentValue   String?
+  requestedValue String
+  domain         MedicalDomain?
+  reason         String?
+  status         MetricStatus @default(PENDING)
+  reviewedBy     String?
+  reviewNote     String?
+  reviewedAt     DateTime?
+
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([patientId, status])
+  @@index([status])
+  @@map("clinical_change_requests")
+}
+
+// ── Prescription ──────────────────────────────────────────────────────
+model Prescription {
+  id          String             @id @default(cuid())
+  patientId   String
+  patient     User               @relation("PatientPrescriptions", fields: [patientId], references: [id])
+  doctorId    String?
+  doctor      User?              @relation("DoctorPrescriptions", fields: [doctorId], references: [id])
+
+  rawText     String?            // OCR extracted text
+  medications Json               // [{name, dose, frequency, domain, interactions:[]}]
+  imageUrl    String?            // stored prescription image
+
+  status      PrescriptionStatus @default(PENDING)
+  flagged     Boolean            @default(false)
+  flags       Json?              // [{drug1, drug2, severity, mechanism}]
+
+  domain      MedicalDomain?
+  notes       String?
+
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([patientId, createdAt])
+  @@map("prescriptions")
+}
+
+// ── Appointment ───────────────────────────────────────────────────────
+model Appointment {
+  id        String            @id @default(cuid())
+  patientId String
+  patient   User              @relation("PatientAppointments", fields: [patientId], references: [id])
+  doctorId  String
+  doctor    User              @relation("DoctorAppointments", fields: [doctorId], references: [id])
+
+  slot      DateTime
+  type      String            @default("consultation") // consultation | follow-up | emergency
+  domain    MedicalDomain
+  status    AppointmentStatus @default(PENDING)
+  reason    String?
+  notes     String?
+  fee       Float?
+
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([patientId, slot])
+  @@index([doctorId, slot])
+  @@map("appointments")
+}
+
+// ── Doctor Reviews ─────────────────────────────────────────────────────
+model DoctorReview {
+  id           String   @id @default(cuid())
+  authorId     String
+  author       User     @relation("ReviewAuthor", fields: [authorId], references: [id])
+  doctorUserId String
+  doctor       User     @relation("ReviewTarget", fields: [doctorUserId], references: [id])
+
+  rating       Int      // 1-5
+  title        String?
+  body         String
+  disease      String?  // what condition was treated
+  domain       MedicalDomain
+  recoveryDays Int?     // how long it took to recover
+  totalCost    Float?   // actual total cost paid (consult + medicine)
+  wouldRecommend Boolean @default(true)
+
+  createdAt    DateTime @default(now())
+
+  @@unique([authorId, doctorUserId]) // one review per patient per doctor
+  @@index([doctorUserId, rating])
+  @@map("doctor_reviews")
+}
+
+// ── Community Posts ────────────────────────────────────────────────────
+model CommunityPost {
+  id        String     @id @default(cuid())
+  authorId  String
+  author    User       @relation(fields: [authorId], references: [id])
+
+  title     String
+  content   String
+  domain    MedicalDomain
+  tags      String[]
+  status    PostStatus @default(PENDING)
+  upvotes   Int        @default(0)
+  isPinned  Boolean    @default(false)
+  modNote   String?    // reason if flagged/removed
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([domain, status, createdAt])
+  @@map("community_posts")
+}

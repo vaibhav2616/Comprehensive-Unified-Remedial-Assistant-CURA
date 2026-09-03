@@ -13,9 +13,9 @@ export default function TrustBadges({ compact = false }) {
         return (
             <div className="flex flex-wrap items-center gap-3 text-xs">
                 {BADGES.map(b => (
-                    <span key={b.label} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-full text-gray-600 shadow-sm">
+                    <span key={b.label} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[var(--gray-300)] rounded-full text-[var(--navy)] shadow-sm">
                         <span>{b.icon}</span>
-                        <span className="font-medium text-gray-700">{b.label}</span>
+                        <span className="font-medium text-[var(--navy)]">{b.label}</span>
                     </span>
                 ))}
             </div>
@@ -25,10 +25,10 @@ export default function TrustBadges({ compact = false }) {
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {BADGES.map(b => (
-                <div key={b.label} className="flex flex-col items-center text-center p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div key={b.label} className="flex flex-col items-center text-center p-4 bg-white border border-[var(--gray-300)] rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <span className="text-2xl mb-2">{b.icon}</span>
-                    <span className="text-sm font-semibold text-gray-800">{b.label}</span>
-                    <span className="text-xs text-gray-500 mt-0.5">{b.sublabel}</span>
+                    <span className="text-sm font-semibold text-[var(--navy)]">{b.label}</span>
+                    <span className="text-xs text-[var(--navy)] mt-0.5">{b.sublabel}</span>
                 </div>
             ))}
         </div>

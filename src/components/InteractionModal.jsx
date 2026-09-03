@@ -58,10 +58,10 @@ export default function InteractionModal({ interactions, doctorName, onClose, on
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-slate-200 p-6 bg-slate-50 flex flex-col sm:flex-row gap-3">
+                <div className="border-t border-[var(--gray-300)] p-6 bg-[var(--navy-light)] flex flex-col sm:flex-row gap-3">
                     <button
                         onClick={onClose}
-                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-slate-700 text-white rounded-xl font-semibold hover:bg-slate-800 transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--navy-light)] text-white rounded-xl font-semibold hover:bg-[var(--navy-light)] transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Go Back Safely
@@ -81,18 +81,18 @@ export default function InteractionModal({ interactions, doctorName, onClose, on
 function InteractionCard({ interaction }) {
     const severityClass = interaction.severity === 'HIGH' ? 'severity-high' : interaction.severity === 'MODERATE' ? 'severity-moderate' : 'severity-low';
     return (
-        <div className="bg-white border border-slate-200 rounded-xl p-4 mb-3 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white border border-[var(--gray-300)] rounded-xl p-4 mb-3 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-start gap-3">
                 <span className={`inline-flex px-2 py-0.5 rounded-md text-xs font-bold uppercase ${severityClass}`}>
                     {interaction.severity}
                 </span>
                 <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <span className="text-sm font-semibold text-slate-800">{interaction.medication}</span>
-                        <span className="text-slate-400">↔</span>
-                        <span className="text-sm font-semibold text-slate-800">{interaction.conflictSubstance}</span>
+                        <span className="text-sm font-semibold text-[var(--navy)]">{interaction.medication}</span>
+                        <span className="text-[var(--navy)]">↔</span>
+                        <span className="text-sm font-semibold text-[var(--navy)]">{interaction.conflictSubstance}</span>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed">{interaction.description}</p>
+                    <p className="text-sm text-[var(--navy)] leading-relaxed">{interaction.description}</p>
                 </div>
             </div>
         </div>

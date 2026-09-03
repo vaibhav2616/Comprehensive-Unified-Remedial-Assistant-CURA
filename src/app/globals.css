@@ -2,55 +2,234 @@
 
 @layer base {
   :root {
-    /* ── Professional Medical Palette ────────────── */
-    --navy: #0c1a2e;
-    --navy-light: #162a46;
-    --med-blue: #0a5eb4;
-    --med-blue-2: #1170c7;
-    --sky: #3b9be0;
-    --sky-light: #d6eaf8;
-    --sky-pale: #eef6fc;
-    --hc-green: #1a8a5c;
-    --hc-green-lt: #d4efdf;
-    --white: #ffffff;
-    --gray-50: #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-200: #e2e8f0;
-    --gray-300: #cbd5e1;
-    --gray-400: #94a3b8;
-    --gray-500: #64748b;
-    --gray-600: #475569;
-    --gray-700: #334155;
-    --gray-800: #1e293b;
-    --gray-900: #0f172a;
+    /* ── Editorial Clinical Palette (Light Mode) ─────────────────────────── */
+    /* Warm Alabaster & Crisp Charcoal Foundations */
+    --bg-base: #FAF9F6;
+    --surface: #FFFFFF;
+    --surface-2: #F3F1EC;
+    --surface-hover: #ECEAE3;
+    --surface-card: #FFFFFF;
+    --border: #E8E6DF;
+    --border-strong: #D5D2C7;
+    --border-hairline: rgba(0, 0, 0, 0.06);
 
-    /* ── Domain coding ──────────────────────────── */
-    --allo: #0a5eb4;
-    --allo-light: #d6eaf8;
-    --ayur: #1a8a5c;
-    --ayur-light: #d4efdf;
-    --homeo: #5b4a9e;
-    --homeo-light: #e8e4f4;
+    /* Text */
+    --text-primary: #12161A;
+    --text-secondary: #525B66;
+    --text-muted: #8C96A3;
+
+    /* Primary Medical Accent: Surgical Cobalt */
+    --primary: #1E4ED8;
+    --primary-dark: #173DB0;
+    --primary-light: #3B82F6;
+    --primary-pale: #EFF6FF;
+    --primary-border: #BFDBFE;
+
+    /* Healing Botanical: Juniper Sage */
+    --success: #1E5B42;
+    --success-dark: #154532;
+    --success-light: #10B981;
+    --success-pale: #F0FDF4;
+    --success-border: #BBF7D0;
+
+    /* Caution & Clinical Alerts: Warm Terracotta / Amber */
+    --warning: #C2410C;
+    --warning-pale: #FFF7ED;
+    --warning-border: #FED7AA;
+
+    /* Critical Danger: Carmine Crimson */
+    --danger: #BE123C;
+    --danger-pale: #FFF1F2;
+    --danger-border: #FECDD3;
+
+    /* AI Intelligence Accent: Deep Iris */
+    --accent: #5B21B6;
+    --accent-pale: #F5F3FF;
+    --accent-border: #DDD6FE;
+
+    /* Domain Colors */
+    --allo: #1E4ED8;
+    --allo-light: #EFF6FF;
+    --allo-border: #BFDBFE;
+    
+    --ayur: #1E5B42;
+    --ayur-light: #F0FDF4;
+    --ayur-border: #BBF7D0;
+
+    --homeo: #6B21A8;
+    --homeo-light: #FAF5FF;
+    --homeo-border: #E9D5FF;
+    --homeo-pale: #FAF5FF;
+
+    /* Gradients */
+    --accent-gradient: linear-gradient(135deg, #1E4ED8 0%, #6B21A8 100%);
+    --hero-gradient: radial-gradient(circle at 50% 0%, rgba(30, 78, 216, 0.08) 0%, rgba(30, 91, 66, 0.05) 40%, rgba(250, 249, 246, 0) 70%);
+
+    /* Nav & Glass */
+    --nav-bg: rgba(250, 249, 246, 0.85);
+    --glass-bg: rgba(255, 255, 255, 0.82);
+    --glass-border: rgba(0, 0, 0, 0.06);
+
+    /* Legacy aliases */
+    --navy: #12161A;
+    --navy-light: #2A323D;
+    --med-blue: #1E4ED8;
+    --med-blue-2: #173DB0;
+    --sky: #3B82F6;
+    --sky-light: #BFDBFE;
+    --sky-pale: #EFF6FF;
+    --hc-green: #1E5B42;
+    --hc-green-lt: #BBF7D0;
+    --white: #FFFFFF;
+    --gray-50: #FAF9F6;
+    --gray-100: #F3F1EC;
+    --gray-200: #E8E6DF;
+    --gray-300: #D5D2C7;
+    --gray-400: #8C96A3;
+    --gray-500: #687382;
+    --gray-600: #525B66;
+    --gray-700: #3D454F;
+    --gray-800: #2A323D;
+    --gray-900: #12161A;
+  }
+
+  .dark {
+    /* ── Midnight Obsidian Palette (Dark Mode) ─────────────────────────── */
+    /* Velvet Carbon & Frosted Graphite Foundations */
+    --bg-base: #0B0E14;
+    --surface: #121720;
+    --surface-2: #18202B;
+    --surface-hover: #1F2A38;
+    --surface-card: #131922;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --border-hairline: rgba(255, 255, 255, 0.04);
+
+    /* Text */
+    --text-primary: #F0F4F8;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+
+    /* Primary Medical Accent: Electric Cyan-Cobalt */
+    --primary: #3B82F6;
+    --primary-dark: #1E40AF;
+    --primary-light: #60A5FA;
+    --primary-pale: rgba(59, 130, 246, 0.12);
+    --primary-border: rgba(59, 130, 246, 0.3);
+
+    /* Healing Botanical: Bioluminescent Emerald */
+    --success: #10B981;
+    --success-dark: #059669;
+    --success-light: #34D399;
+    --success-pale: rgba(16, 185, 129, 0.12);
+    --success-border: rgba(16, 185, 129, 0.3);
+
+    /* Warning: Luminous Amber */
+    --warning: #F59E0B;
+    --warning-pale: rgba(245, 158, 11, 0.12);
+    --warning-border: rgba(245, 158, 11, 0.3);
+
+    /* Critical Danger: Luminous Ruby */
+    --danger: #F43F5E;
+    --danger-pale: rgba(244, 63, 94, 0.12);
+    --danger-border: rgba(244, 63, 94, 0.3);
+
+    /* AI Intelligence Accent: Cyber Violet */
+    --accent: #A855F7;
+    --accent-pale: rgba(168, 85, 247, 0.12);
+    --accent-border: rgba(168, 85, 247, 0.3);
+
+    /* Domain Colors */
+    --allo: #60A5FA;
+    --allo-light: rgba(96, 165, 250, 0.12);
+    --allo-border: rgba(96, 165, 250, 0.3);
+
+    --ayur: #34D399;
+    --ayur-light: rgba(52, 211, 153, 0.12);
+    --ayur-border: rgba(52, 211, 153, 0.3);
+
+    --homeo: #C084FC;
+    --homeo-light: rgba(192, 132, 252, 0.12);
+    --homeo-border: rgba(192, 132, 252, 0.3);
+    --homeo-pale: rgba(192, 132, 252, 0.12);
+
+    /* Gradients */
+    --accent-gradient: linear-gradient(135deg, #3B82F6 0%, #A855F7 100%);
+    --hero-gradient: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.08) 40%, rgba(11, 14, 20, 0) 70%);
+
+    /* Nav & Glass */
+    --nav-bg: rgba(11, 14, 20, 0.85);
+    --glass-bg: rgba(18, 23, 32, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.08);
+
+    /* Legacy aliases */
+    --navy: #F0F4F8;
+    --navy-light: #CBD5E1;
+    --med-blue: #3B82F6;
+    --med-blue-2: #60A5FA;
+    --sky: #60A5FA;
+    --sky-light: rgba(96, 165, 250, 0.3);
+    --sky-pale: rgba(96, 165, 250, 0.12);
+    --hc-green: #34D399;
+    --hc-green-lt: rgba(52, 211, 153, 0.3);
+    --white: #121720;
+    --gray-50: #0B0E14;
+    --gray-100: #121720;
+    --gray-200: #18202B;
+    --gray-300: #242E3D;
+    --gray-400: #475569;
+    --gray-500: #64748B;
+    --gray-600: #94A3B8;
+    --gray-700: #CBD5E1;
+    --gray-800: #E2E8F0;
+    --gray-900: #F8FAFC;
   }
 }
 
-/* ── Utility classes ──────────────────────────────── */
+/* ── Utility & Editorial Components ───────────────────────────────────── */
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .card-hover {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .card-hover:hover {
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
+  }
+
+  /* Architectural Grid Textures */
+  .bg-grid-subtle {
+    background-size: 32px 32px;
+    background-image: 
+      linear-gradient(to right, var(--border-hairline) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-hairline) 1px, transparent 1px);
+  }
+
+  .bg-dots-subtle {
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, var(--border-strong) 0.8px, transparent 0.8px);
   }
 }
 
-/* ── Subtle animations ────────────────────────────── */
+/* ── Animations ────────────────────────────────────────────────────────── */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -61,175 +240,127 @@
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
 }
 
-@keyframes slide-right {
-  from {
-    opacity: 0;
-    transform: translateX(-12px);
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
   }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scan-line {
-  0% {
-    top: 0;
-  }
-
-  100% {
-    top: 100%;
-  }
-}
-
-@keyframes pulse-soft {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
   50% {
-    opacity: .7;
+    transform: translateY(-6px);
   }
 }
 
-/* Premium bezier curves for a smooth, trustworthy startup feel */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes scan-glow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 .animate-fade-up {
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-slide-right {
-  animation: slide-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-float {
+  animation: float-gentle 4s ease-in-out infinite;
 }
 
-.animate-scan-line {
-  animation: scan-line 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
 }
 
-.animate-pulse-soft {
-  animation: pulse-soft 3s ease-in-out infinite;
-}
+/* Stagger Children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+.stagger > *:nth-child(6) { animation-delay: 300ms; }
 
-/* Stagger children */
-.stagger>*:nth-child(1) {
-  animation-delay: 0ms;
-}
-
-.stagger>*:nth-child(2) {
-  animation-delay: 80ms;
-}
-
-.stagger>*:nth-child(3) {
-  animation-delay: 160ms;
-}
-
-.stagger>*:nth-child(4) {
-  animation-delay: 240ms;
-}
-
-.stagger>*:nth-child(5) {
-  animation-delay: 320ms;
-}
-
-.stagger>*:nth-child(6) {
-  animation-delay: 400ms;
-}
-
-/* ── Domain badges ────────────────────────────────── */
+/* ── Domain badges ─────────────────────────────────────────────────────── */
 .badge-allopathy {
   background: var(--allo-light);
   color: var(--allo);
-  border: 1px solid #b4d4f0;
+  border: 1px solid var(--allo-border);
 }
 
 .badge-ayurveda {
   background: var(--ayur-light);
   color: var(--ayur);
-  border: 1px solid #a3d8bf;
+  border: 1px solid var(--ayur-border);
 }
 
 .badge-homeopathy {
   background: var(--homeo-light);
   color: var(--homeo);
-  border: 1px solid #c5bede;
+  border: 1px solid var(--homeo-border);
 }
 
-/* ── Severity badges ──────────────────────────────── */
+/* ── Severity badges ────────────────────────────────────────────────────── */
 .severity-high {
-  background: #fde8e8;
-  color: #991b1b;
-  border: 1px solid #f5a3a3;
+  background: var(--danger-pale);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
 }
 
 .severity-moderate {
-  background: #fef3cd;
-  color: #856404;
-  border: 1px solid #f5d97a;
+  background: var(--warning-pale);
+  color: var(--warning);
+  border: 1px solid var(--warning-border);
 }
 
 .severity-low {
-  background: var(--sky-pale);
-  color: var(--med-blue);
-  border: 1px solid #a8ccee;
+  background: var(--primary-pale);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
 }
 
-/* ── Scrollbar ────────────────────────────────────── */
+/* ── Custom Scrollbar ───────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--gray-100);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gray-300);
-  border-radius: 3px;
+  background: var(--border-strong);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gray-400);
+  background: var(--text-muted);
 }
-<!-- commit-touch: 2026-08-10 09:20:00 -->
 
-<!-- commit-touch: 2026-08-18 18:20:00 -->
+/* ── Global Base ────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
 
-<!-- commit-touch: 2026-08-26 17:00:00 -->
-
-<!-- commit-touch: 2026-08-30 13:30:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-10 09:20:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-18 18:20:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-26 17:00:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-30 13:30:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-10 09:20:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-18 18:20:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-26 17:00:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-30 13:30:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-10 09:20:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-18 18:20:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-26 17:00:00 -->
-
-<!-- commit-touch: shubhamsoni1234 2026-08-30 13:30:00 -->
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+}

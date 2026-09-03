@@ -1,88 +1,83 @@
 'use client';
 import Link from 'next/link';
 import TrustBadges from '@/components/TrustBadges';
+import { Sparkles, Shield, Activity, Users, ArrowRight } from 'lucide-react';
 
 const PILLARS = [
     {
         number: '01',
-        title: 'The Patient Safety Problem',
-        description: 'In India alone, over 400 million people simultaneously use Allopathy, Ayurveda, and Homeopathy. Zero platforms exist to protect them from cross-domain drug interactions. CURA fills this critical clinical gap.',
+        title: 'The Pluralistic Health Dilemma',
+        description: 'In India alone, over 400 million citizens concurrently use Allopathy, Ayurveda, and Homeopathy. Prior to CURA, zero clinical platforms existed to systematically screen for dangerous cross-domain drug-herb interactions. CURA bridges this vital healthcare gap.',
         stat: '400M+',
-        statLabel: 'patients using multiple systems concurrently'
+        statLabel: 'patients actively navigating multiple medical domains'
     },
     {
         number: '02',
-        title: 'Our Solution',
-        description: 'CURA is the world\'s first cross-domain medical safety operating system. Our clinical AI generates side-by-side treatment plans from all three domains while actively blocking dangerous drug-herb interactions — always with a licensed doctor in the loop.',
-        stat: '30+',
-        statLabel: 'NIH/PubMed-backed interaction rules in v1'
+        title: 'The Evidence-Based Solution',
+        description: 'CURA is the world\'s first cross-domain medical safety OS. Our clinical engine provides side-by-side comparative outcomes while automatically flagging hazardous combinations — always with a board-certified clinician in the loop.',
+        stat: '100%',
+        statLabel: 'doctor-verified approval gate for telemetry and prescriptions'
     },
     {
         number: '03',
-        title: 'The Data Moat',
-        description: 'Every doctor decision creates training data. Accept, edit, or reject — we capture the clinical reasoning. Over time, we build a proprietary medical AI corpus no competitor can replicate without our network of doctors.',
-        stat: '∞',
-        statLabel: 'Proprietary training data from every consultation'
+        title: 'The Clinical Data Moat',
+        description: 'Every clinical signoff creates verified real-world evidence. As doctors approve or reject telemetry updates and medications, we build a proprietary multi-disciplinary dataset representing the future of integrative medicine.',
+        stat: '3-Way',
+        statLabel: 'unified integration of Allopathy, Ayurveda & Homeopathy'
     }
 ];
 
 const TEAM_PRINCIPLES = [
-    { icon: '🔬', title: 'Research-First', desc: 'Every interaction rule traces back to a PubMed citation or systematic review.' },
-    { icon: '👨‍⚕️', title: 'Doctor-in-the-Loop', desc: 'AI generates. Doctors decide. We never replace clinical judgment.' },
-    { icon: '🛡️', title: 'Safety Before Growth', desc: 'We will never ship a feature that compromises patient safety for engagement metrics.' },
-    { icon: '🌍', title: 'Built for Bharat', desc: 'Designed for India\'s unique pluralistic medical culture — and ready to scale globally.' },
-];
-
-const ROADMAP = [
-    { phase: 'v1 (Now)', label: 'MVP - Rule-based AI + manual doctor review', status: 'live' },
-    { phase: 'v2 (Q1)', label: 'ClinicalBERT NER for prescription OCR', status: 'building' },
-    { phase: 'v3 (Q2)', label: 'PostgreSQL + real-time patient records', status: 'planned' },
-    { phase: 'v4 (Q3)', label: 'Trained interaction ML model (once datasets provided)', status: 'planned' },
-    { phase: 'v5 (Q4)', label: 'Telemedicine + Live Consultation', status: 'planned' },
+    { icon: '🔬', title: 'Research-First', desc: 'Every clinical interaction rule is grounded in peer-reviewed pharmacognosy and PubMed medical literature.' },
+    { icon: '👨‍⚕️', title: 'Clinician-in-the-Loop', desc: 'AI proposes. Doctors decide. We never replace the professional judgment of a registered practitioner.' },
+    { icon: '🛡️', title: 'Safety Before Engagement', desc: 'We never compromise medical integrity, data privacy, or patient well-being for engagement metrics.' },
+    { icon: '🌍', title: 'Built for Pluralistic Healing', desc: 'Engineered specifically for pluralistic healthcare cultures and extensible to global integrative medicine.' },
 ];
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] transition-colors duration-300">
 
-            {/* Hero */}
-            <section className="bg-[var(--navy)] text-white py-24 px-6">
-                <div className="max-w-4xl mx-auto text-center">
-                    <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-widest uppercase"
-                        style={{ background: 'rgba(255,255,255,0.12)', color: '#a8d4f5' }}>
-                        Our Mission
+            {/* Hero Section */}
+            <section className="relative overflow-hidden py-24 px-6 border-b border-[var(--border)] bg-grid-subtle">
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 mb-6">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        Our Founding Mission
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
                         Bridging Three Medical Traditions.<br />
-                        <span style={{ color: '#7ecbf0' }}>Protecting Every Patient.</span>
+                        <span className="bg-gradient-to-r from-blue-600 via-emerald-500 to-purple-600 bg-clip-text text-transparent">
+                            Protecting Every Patient.
+                        </span>
                     </h1>
-                    <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
-                        CURA exists because no one should have to choose between modern medicine,
-                        ancient wisdom, and gentle healing — and no one should be harmed by combining them unknowingly.
+                    <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+                        CURA exists because no patient should have to choose blindly between modern Western medicine, ancient Ayurvedic wisdom, and gentle Homeopathy — and no one should be endangered by combining them unknowingly.
                     </p>
                 </div>
             </section>
 
             {/* The Three Pillars */}
-            <section className="py-20 px-6 bg-gray-50">
+            <section className="py-20 px-6 border-b border-[var(--border)]">
                 <div className="max-w-5xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center mb-16" style={{ color: 'var(--navy)' }}>
-                        Why CURA Exists
-                    </h2>
+                    <div className="text-center mb-16">
+                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 block">Foundational Thesis</span>
+                        <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Why CURA Exists</h2>
+                    </div>
                     <div className="space-y-12">
                         {PILLARS.map(p => (
-                            <div key={p.number} className="flex flex-col md:flex-row gap-8 items-start">
+                            <div key={p.number} className="flex flex-col md:flex-row gap-8 items-start p-8 rounded-3xl bg-[var(--surface)] border border-[var(--border)] shadow-sm card-hover">
                                 <div className="flex-shrink-0">
-                                    <span className="text-6xl font-black opacity-10" style={{ color: 'var(--med-blue)' }}>
+                                    <span className="text-5xl font-black text-blue-600/20 dark:text-blue-400/20">
                                         {p.number}
                                     </span>
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--navy)' }}>{p.title}</h3>
-                                    <p className="text-gray-600 leading-relaxed mb-4">{p.description}</p>
+                                    <h3 className="text-xl font-bold mb-2 text-[var(--text-primary)]">{p.title}</h3>
+                                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-4">{p.description}</p>
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-3xl font-black" style={{ color: 'var(--med-blue)' }}>{p.stat}</span>
-                                        <span className="text-sm text-gray-500">{p.statLabel}</span>
+                                        <span className="text-2xl sm:text-3xl font-extrabold text-blue-600 dark:text-blue-400">{p.stat}</span>
+                                        <span className="text-xs text-[var(--text-muted)] font-medium">{p.statLabel}</span>
                                     </div>
                                 </div>
                             </div>
@@ -92,113 +87,46 @@ export default function AboutPage() {
             </section>
 
             {/* Principles */}
-            <section className="py-20 px-6">
+            <section className="py-20 px-6 bg-[var(--surface)] border-b border-[var(--border)]">
                 <div className="max-w-5xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center mb-12" style={{ color: 'var(--navy)' }}>
-                        Our Operating Principles
-                    </h2>
+                    <div className="text-center mb-12">
+                        <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">Clinical Integrity</span>
+                        <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Our Operating Principles</h2>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {TEAM_PRINCIPLES.map(p => (
-                            <div key={p.title} className="p-6 rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
-                                <span className="text-2xl mb-3 block">{p.icon}</span>
-                                <h3 className="font-bold text-gray-900 mb-2">{p.title}</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
+                            <div key={p.title} className="p-6 rounded-3xl border border-[var(--border)] bg-[var(--surface-2)] shadow-sm card-hover">
+                                <span className="text-3xl mb-3 block">{p.icon}</span>
+                                <h3 className="font-bold text-sm sm:text-base text-[var(--text-primary)] mb-1">{p.title}</h3>
+                                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{p.desc}</p>
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* Technology Stack */}
-            <section className="py-20 px-6 bg-gray-50">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center mb-6" style={{ color: 'var(--navy)' }}>
-                        Technology Architecture
-                    </h2>
-                    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                        Built for enterprise scale from day one. Our microservice architecture
-                        allows individual AI components to be upgraded as better data and models become available.
-                    </p>
-                    <div className="bg-[var(--navy)] rounded-2xl p-8 text-white font-mono text-sm">
-                        <p className="text-green-400 mb-2">{'// CURA System Architecture'}</p>
-                        <div className="space-y-1.5 text-blue-200">
-                            <p>Next.js Frontend <span className="text-gray-400">→</span> <span className="text-yellow-300">Clinical UI + Dashboard</span></p>
-                            <p>Next.js API Routes <span className="text-gray-400">→</span> <span className="text-yellow-300">Auth + Appointments + User Data</span></p>
-                            <p>FastAPI Microservice <span className="text-gray-400">→</span> <span className="text-green-300">OCR + NER + Interaction AI + Moderation</span></p>
-                            <p>PostgreSQL <span className="text-gray-400">→</span> <span className="text-blue-300">Patient Records (v3)</span></p>
-                            <p>BioBERT / ClinicalBERT <span className="text-gray-400">→</span> <span className="text-purple-300">NER Model (when dataset provided)</span></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Roadmap */}
-            <section className="py-20 px-6">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center mb-12" style={{ color: 'var(--navy)' }}>
-                        Product Roadmap
-                    </h2>
-                    <div className="space-y-4">
-                        {ROADMAP.map(r => (
-                            <div key={r.phase} className="flex items-center gap-4 p-4 rounded-xl border"
-                                style={{
-                                    borderColor: r.status === 'live' ? 'var(--hc-green)' : r.status === 'building' ? 'var(--med-blue)' : 'var(--gray-200)',
-                                    background: r.status === 'live' ? 'var(--hc-green-lt)' : r.status === 'building' ? 'var(--sky-pale)' : 'white'
-                                }}>
-                                <span className="text-xs font-bold px-2 py-1 rounded-full flex-shrink-0"
-                                    style={{
-                                        background: r.status === 'live' ? 'var(--hc-green)' : r.status === 'building' ? 'var(--med-blue)' : 'var(--gray-200)',
-                                        color: r.status === 'planned' ? 'var(--gray-600)' : 'white'
-                                    }}>
-                                    {r.status === 'live' ? '✓ LIVE' : r.status === 'building' ? '⚡ BUILDING' : '○ PLANNED'}
-                                </span>
-                                <div>
-                                    <span className="text-xs font-semibold text-gray-500">{r.phase} — </span>
-                                    <span className="text-sm text-gray-800">{r.label}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Trust Section */}
-            <section className="py-16 px-6 bg-gray-50">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-xl font-bold text-center mb-8" style={{ color: 'var(--navy)' }}>
-                        Compliance & Safety Standards
-                    </h2>
-                    <TrustBadges />
                 </div>
             </section>
 
             {/* CTA */}
-            <section className="py-16 px-6 text-center" style={{ background: 'var(--navy)' }}>
-                <div className="max-w-2xl mx-auto">
-                    <h2 className="text-2xl font-bold text-white mb-4">Ready to join the clinical revolution?</h2>
-                    <p className="text-blue-200 mb-8">Patient safety is not a feature. It is the product.</p>
+            <section className="py-20 px-6 text-center relative overflow-hidden bg-slate-950 text-white">
+                <div className="max-w-2xl mx-auto relative z-10">
+                    <h2 className="text-2xl sm:text-3xl font-extrabold mb-4">Patient safety is not an add-on. It is the product.</h2>
+                    <p className="text-xs sm:text-sm text-slate-300 mb-8">Experience clinical cross-domain safety with registered healthcare professionals.</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/prescription"
-                            className="px-8 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:opacity-90"
-                            style={{ background: 'var(--hc-green)' }}>
+                        <Link
+                            href="/prescription"
+                            className="px-8 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white shadow-lg transition-all hover:scale-105"
+                            style={{ background: 'var(--accent-gradient)' }}
+                        >
                             Try the Safety Engine
                         </Link>
-                        <Link href="/doctors"
-                            className="px-8 py-3 rounded-lg font-semibold border border-white/30 text-white hover:bg-white/10 transition-all duration-300">
-                            Find a Doctor
+                        <Link
+                            href="/doctors"
+                            className="px-8 py-3.5 rounded-xl font-bold text-xs sm:text-sm border border-white/20 text-white hover:bg-white/10 transition-all hover:scale-105"
+                        >
+                            Explore Doctor Directory
                         </Link>
                     </div>
                 </div>
             </section>
-
         </div>
     );
 }
-
-// commit-touch: 2026-08-26 10:15:00
-
-// commit-touch: shubhamsoni1234 2026-08-26 10:15:00
-
-// commit-touch: shubhamsoni1234 2026-08-26 10:15:00
-
-// commit-touch: shubhamsoni1234 2026-08-26 10:15:00
