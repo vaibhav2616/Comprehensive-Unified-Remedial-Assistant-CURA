@@ -1,13 +1,25 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useApp } from '@/context/AppContext';
-import { HeartPulse, ChevronDown, Menu, X, LogIn, UserPlus } from 'lucide-react';
+import { HeartPulse, ChevronDown, Menu, X, LogIn, UserPlus, User, Stethoscope } from 'lucide-react';
 
 export default function Navbar() {
     const { currentUser } = useApp();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileDashboardOpen, setMobileDashboardOpen] = useState(false);
+    const [dashboardDropdownOpen, setDashboardDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDashboardDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const closeMobileMenu = () => {
         setMobileMenuOpen(false);
@@ -28,7 +40,7 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop Nav Links */}
-                    <div className="hidden md:flex space-x-8">
+                    <div className="hidden md:flex space-x-8 items-center">
                         <Link href="/prescription" className="text-[var(--gray-600)] hover:text-[var(--med-blue)] font-medium transition-colors">
                             Upload Rx
                         </Link>
@@ -41,19 +53,46 @@ export default function Navbar() {
                         <Link href="/about" className="text-[var(--gray-600)] hover:text-[var(--med-blue)] font-medium transition-colors">
                             About
                         </Link>
-                        <div className="relative group">
-                            <button className="flex items-center text-[var(--gray-600)] hover:text-[var(--med-blue)] font-medium transition-colors">
+
+                        {/* Desktop Dashboard Dropdown */}
+                        <div
+                            ref={dropdownRef}
+                            className="relative flex items-center py-2"
+                            onMouseEnter={() => setDashboardDropdownOpen(true)}
+                            onMouseLeave={() => setDashboardDropdownOpen(false)}
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setDashboardDropdownOpen(prev => !prev)}
+                                className="flex items-center text-[var(--gray-600)] hover:text-[var(--med-blue)] font-medium transition-colors focus:outline-none cursor-pointer"
+                                aria-expanded={dashboardDropdownOpen}
+                            >
                                 <span>Dashboard</span>
-                                <ChevronDown className="h-4 w-4 ml-1" />
+                                <ChevronDown className={`h-4 w-4 ml-1 transition-transform duration-200 ${dashboardDropdownOpen ? 'rotate-180 text-[var(--med-blue)]' : ''}`} />
                             </button>
-                            <div className="absolute hidden group-hover:block w-48 bg-white shadow-lg border border-[var(--gray-100)] rounded-md mt-2">
-                                <Link href="/dashboard/patient" className="block px-4 py-2 hover:bg-[var(--sky-pale)] text-[var(--gray-700)]">
-                                    Patient Portal
-                                </Link>
-                                <Link href="/dashboard/doctor" className="block px-4 py-2 hover:bg-[var(--sky-pale)] text-[var(--gray-700)]">
-                                    Doctor Portal
-                                </Link>
-                            </div>
+
+                            {dashboardDropdownOpen && (
+                                <div className="absolute top-full left-0 pt-1 w-52 z-50 animate-fade-in">
+                                    <div className="bg-white shadow-xl border border-slate-200/90 rounded-xl py-1.5 overflow-hidden">
+                                        <Link
+                                            href="/dashboard/patient"
+                                            onClick={() => setDashboardDropdownOpen(false)}
+                                            className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[var(--sky-pale)] text-slate-700 hover:text-[var(--med-blue)] text-sm font-medium transition-colors"
+                                        >
+                                            <User className="w-4 h-4 text-slate-400" />
+                                            <span>Patient Portal</span>
+                                        </Link>
+                                        <Link
+                                            href="/dashboard/doctor"
+                                            onClick={() => setDashboardDropdownOpen(false)}
+                                            className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[var(--sky-pale)] text-slate-700 hover:text-[var(--med-blue)] text-sm font-medium transition-colors"
+                                        >
+                                            <Stethoscope className="w-4 h-4 text-slate-400" />
+                                            <span>Doctor Portal</span>
+                                        </Link>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 

@@ -10,10 +10,20 @@ import { useApp } from '@/context/AppContext';
 
 export default function PatientDashboard() {
     const { activePrescription, appointments } = useApp();
-    const { patient, reminders, progressReports, wellnessChatHistory } = patientDashboardData;
+    const { patient, reminders: initialReminders, progressReports, wellnessChatHistory } = patientDashboardData;
+    const [reminders, setReminders] = useState(initialReminders || []);
     const [chatMessages, setChatMessages] = useState(wellnessChatHistory || []);
     const [chatInput, setChatInput] = useState('');
     const [activeTab, setActiveTab] = useState('overview');
+
+    const toggleReminder = (id) => {
+        setReminders(prev => prev.map(rem =>
+            rem.id === id ? { ...rem, taken: !rem.taken } : rem
+        ));
+    };
+
+    const takenCount = reminders.filter(r => r.taken).length;
+    const totalCount = reminders.length;
 
     const handleSendChat = () => {
         if (!chatInput.trim()) return;
@@ -81,19 +91,40 @@ export default function PatientDashboard() {
 
                         {/* Today's Reminders */}
                         <div className="bg-white rounded-2xl border border-slate-200 p-6">
-                            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-blue-600" /> Today's Medications
-                            </h3>
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                                    <Clock className="w-5 h-5 text-blue-600" /> Today's Medications
+                                </h3>
+                                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                                    {takenCount} of {totalCount} taken
+                                </span>
+                            </div>
                             <div className="space-y-3">
                                 {reminders.map(rem => (
-                                    <div key={rem.id} className={`flex items-center gap-3 p-3 rounded-xl transition-colors ${rem.taken ? 'bg-emerald-50' : 'bg-slate-50'}`}>
+                                    <div
+                                        key={rem.id}
+                                        role="button"
+                                        tabIndex={0}
+                                        onClick={() => toggleReminder(rem.id)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                toggleReminder(rem.id);
+                                            }
+                                        }}
+                                        className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 cursor-pointer select-none ${
+                                            rem.taken ? 'bg-emerald-50 hover:bg-emerald-100/60' : 'bg-slate-50 hover:bg-slate-100'
+                                        }`}
+                                    >
                                         {rem.taken ? (
-                                            <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                                            <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 transition-transform duration-200 scale-105" />
                                         ) : (
-                                            <Circle className="w-5 h-5 text-slate-300 flex-shrink-0" />
+                                            <Circle className="w-5 h-5 text-slate-300 flex-shrink-0 hover:text-blue-400 transition-colors duration-200" />
                                         )}
                                         <div className="flex-1">
-                                            <p className={`text-sm font-medium ${rem.taken ? 'text-emerald-700 line-through' : 'text-slate-800'}`}>{rem.medication}</p>
+                                            <p className={`text-sm font-medium transition-all duration-200 ${rem.taken ? 'text-emerald-700 line-through opacity-75' : 'text-slate-800'}`}>
+                                                {rem.medication}
+                                            </p>
                                             <p className="text-xs text-slate-400">{rem.time}</p>
                                         </div>
                                     </div>
@@ -165,21 +196,66 @@ export default function PatientDashboard() {
                 {/* Reminders Tab */}
                 {activeTab === 'reminders' && (
                     <div className="bg-white rounded-2xl border border-slate-200 p-6">
-                        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                            <Bell className="w-5 h-5 text-amber-500" /> Medication Schedule
-                        </h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                            <div>
+                                <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
+                                    <Bell className="w-5 h-5 text-amber-500" /> Medication Schedule
+                                </h3>
+                                <p className="text-xs text-slate-500 mt-1">
+                                    Click any medication dose to mark it as taken or pending
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                                    <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
+                                    <span>{takenCount} of {totalCount} taken today</span>
+                                </span>
+                            </div>
+                        </div>
                         <div className="space-y-3">
                             {reminders.map(rem => (
-                                <div key={rem.id} className={`flex items-center gap-4 p-4 rounded-xl border ${rem.taken ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-white'}`}>
-                                    {rem.taken ? <CheckCircle className="w-6 h-6 text-emerald-500" /> : <Circle className="w-6 h-6 text-slate-300" />}
-                                    <div className="flex-1">
-                                        <p className={`font-medium ${rem.taken ? 'text-emerald-700 line-through' : 'text-slate-800'}`}>{rem.medication}</p>
+                                <div
+                                    key={rem.id}
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => toggleReminder(rem.id)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            toggleReminder(rem.id);
+                                        }
+                                    }}
+                                    className={`group flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 cursor-pointer select-none ${
+                                        rem.taken
+                                            ? 'border-emerald-200 bg-emerald-50/70 hover:bg-emerald-50'
+                                            : 'border-slate-200 bg-white hover:border-blue-300 hover:bg-slate-50/60'
+                                    }`}
+                                >
+                                    <div className="transition-transform duration-200 group-hover:scale-110 flex-shrink-0">
+                                        {rem.taken ? (
+                                            <CheckCircle className="w-6 h-6 text-emerald-500" />
+                                        ) : (
+                                            <Circle className="w-6 h-6 text-slate-300 group-hover:text-blue-500" />
+                                        )}
                                     </div>
-                                    <span className={`px-3 py-1 rounded-lg text-sm font-medium ${rem.taken ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                                    <div className="flex-1">
+                                        <p className={`font-medium text-sm sm:text-base transition-all duration-200 ${
+                                            rem.taken ? 'text-emerald-700 line-through opacity-75' : 'text-slate-800'
+                                        }`}>
+                                            {rem.medication}
+                                        </p>
+                                    </div>
+                                    <span className={`px-3 py-1 rounded-lg text-xs sm:text-sm font-medium transition-colors duration-200 ${
+                                        rem.taken ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+                                    }`}>
                                         {rem.time}
                                     </span>
-                                    <span className={`text-xs font-semibold ${rem.taken ? 'text-emerald-600' : 'text-slate-400'}`}>
-                                        {rem.taken ? '✓ Taken' : 'Pending'}
+                                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-md transition-all duration-200 ${
+                                        rem.taken
+                                            ? 'bg-emerald-200/60 text-emerald-800'
+                                            : 'bg-slate-100 text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600'
+                                    }`}>
+                                        {rem.taken ? '✓ Taken' : 'Mark Taken'}
                                     </span>
                                 </div>
                             ))}
@@ -260,19 +336,3 @@ function StatCard({ icon: Icon, label, value, color }) {
         </div>
     );
 }
-
-// commit-touch: 2026-08-14 11:00:00
-
-// commit-touch: 2026-08-14 15:30:00
-
-// commit-touch: tusharsingh1206 2026-08-14 11:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-14 15:30:00
-
-// commit-touch: tusharsingh1206 2026-08-14 11:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-14 15:30:00
-
-// commit-touch: tusharsingh1206 2026-08-14 11:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-14 15:30:00
