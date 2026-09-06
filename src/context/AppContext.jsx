@@ -5,10 +5,18 @@ import { samplePrescription, appointments as defaultAppointments } from '@/data/
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState({ role: 'patient', name: 'Aryan Mehta' });
+    const [currentUser, setCurrentUser] = useState({ role: 'patient', name: 'Aryan Mehta', email: 'aryan.mehta@cura.health' });
     const [activePrescription, setActivePrescription] = useState(null);
     const [appointmentsList, setAppointmentsList] = useState(defaultAppointments);
     const [uploadState, setUploadState] = useState('idle'); // idle | uploading | extracting | done
+
+    const login = useCallback((userData) => {
+        setCurrentUser(prev => ({ ...prev, ...userData }));
+    }, []);
+
+    const logout = useCallback(() => {
+        setCurrentUser(null);
+    }, []);
 
     const uploadPrescription = useCallback(async () => {
         setUploadState('uploading');
@@ -36,7 +44,7 @@ export function AppProvider({ children }) {
 
     return (
         <AppContext.Provider value={{
-            currentUser, switchRole,
+            currentUser, setCurrentUser, switchRole, login, logout,
             activePrescription, uploadPrescription, clearPrescription, uploadState,
             appointments: appointmentsList, bookAppointment,
         }}>
@@ -50,11 +58,3 @@ export function useApp() {
     if (!ctx) throw new Error('useApp must be used within <AppProvider>');
     return ctx;
 }
-
-// commit-touch: 2026-08-10 11:40:00
-
-// commit-touch: sameerpatel01 2026-08-10 11:40:00
-
-// commit-touch: sameerpatel01 2026-08-10 11:40:00
-
-// commit-touch: sameerpatel01 2026-08-10 11:40:00

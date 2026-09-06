@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useApp } from '@/context/AppContext';
-import { HeartPulse, ChevronDown, Menu, X } from 'lucide-react';
+import { HeartPulse, ChevronDown, Menu, X, LogIn, UserPlus } from 'lucide-react';
 
 export default function Navbar() {
     const { currentUser } = useApp();
@@ -57,10 +57,32 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    {/* Desktop User Role & Mobile Hamburger Button */}
+                    {/* Desktop Auth & User Actions */}
                     <div className="flex items-center space-x-3">
-                        <div className="hidden sm:inline-flex px-3 py-1 bg-[var(--sky-pale)] text-[var(--med-blue)] border border-[var(--sky-light)] text-sm font-medium rounded-full cursor-default">
-                            {currentUser?.role === 'patient' ? 'Patient' : 'Doctor'}
+                        {/* Role Indicator Badge */}
+                        {currentUser && (
+                            <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--sky-pale)] text-[var(--med-blue)] border border-[var(--sky-light)] text-sm font-medium rounded-full cursor-default">
+                                <span className="w-2 h-2 rounded-full bg-[var(--hc-green)]"></span>
+                                <span>{currentUser?.role === 'patient' ? 'Patient' : 'Doctor'}</span>
+                            </div>
+                        )}
+
+                        {/* Login & Sign Up buttons */}
+                        <div className="hidden sm:flex items-center space-x-2">
+                            <Link
+                                href="/login"
+                                className="px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:text-[var(--med-blue)] hover:bg-[var(--sky-pale)] rounded-lg transition-colors flex items-center gap-1.5"
+                            >
+                                <LogIn className="w-4 h-4" />
+                                <span>Login</span>
+                            </Link>
+                            <Link
+                                href="/register"
+                                className="px-3.5 py-1.5 text-sm font-medium bg-[var(--med-blue)] hover:bg-[var(--med-blue-2)] text-white rounded-lg transition-colors shadow-sm flex items-center gap-1.5"
+                            >
+                                <UserPlus className="w-4 h-4" />
+                                <span>Sign Up</span>
+                            </Link>
                         </div>
 
                         {/* Hamburger Button (below md breakpoint) */}
@@ -140,9 +162,29 @@ export default function Navbar() {
                             )}
                         </div>
 
+                        {/* Mobile Auth Actions (Login / Sign Up) */}
+                        <div className="pt-3 border-t border-[var(--gray-200)] flex gap-2">
+                            <Link
+                                href="/login"
+                                onClick={closeMobileMenu}
+                                className="flex-1 text-center py-2 px-3 text-sm font-medium border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors flex items-center justify-center gap-1.5"
+                            >
+                                <LogIn className="w-3.5 h-3.5" />
+                                <span>Login</span>
+                            </Link>
+                            <Link
+                                href="/register"
+                                onClick={closeMobileMenu}
+                                className="flex-1 text-center py-2 px-3 text-sm font-medium bg-[var(--med-blue)] hover:bg-[var(--med-blue-2)] text-white rounded-lg transition-colors shadow-sm flex items-center justify-center gap-1.5"
+                            >
+                                <UserPlus className="w-3.5 h-3.5" />
+                                <span>Sign Up</span>
+                            </Link>
+                        </div>
+
                         {/* Mobile Role Badge */}
-                        <div className="pt-4 mt-2 border-t border-[var(--gray-200)] flex items-center justify-between px-3">
-                            <span className="text-xs text-[var(--gray-500)] font-medium">Active Profile</span>
+                        <div className="pt-2 flex items-center justify-between px-1">
+                            <span className="text-xs text-[var(--gray-500)] font-medium">Active: {currentUser?.name || 'Guest'}</span>
                             <div className="px-3 py-1 bg-[var(--sky-pale)] text-[var(--med-blue)] border border-[var(--sky-light)] text-xs font-semibold rounded-full">
                                 {currentUser?.role === 'patient' ? 'Patient' : 'Doctor'}
                             </div>
