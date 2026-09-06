@@ -1,11 +1,11 @@
-﻿'use client';
+'use client';
 import Link from 'next/link';
 
 const BADGES = [
-    { icon: '≡ƒ¢í∩╕Å', label: 'DPDP 2023 Compliant', sublabel: 'India digital privacy law' },
-    { icon: 'ΓÜò∩╕Å', label: 'AYUSH Aligned', sublabel: 'Ministry of AYUSH India' },
-    { icon: '≡ƒöÆ', label: 'AES-256 Encrypted', sublabel: 'All records at rest & transit' },
-    { icon: 'Γ£à', label: 'Doctor-in-the-Loop', sublabel: 'No AI prescription without MD' },
+    { icon: '🛡️', label: 'DPDP 2023 Compliant', sublabel: 'India digital privacy law' },
+    { icon: '⚕️', label: 'AYUSH Aligned', sublabel: 'Ministry of AYUSH India' },
+    { icon: '🔒', label: 'AES-256 Encrypted', sublabel: 'All records at rest & transit' },
+    { icon: '✅', label: 'Doctor-in-the-Loop', sublabel: 'No AI prescription without MD' },
 ];
 
 export default function TrustBadges({ compact = false }) {

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import Link from 'next/link';
 import TrustBadges from '@/components/TrustBadges';
 
@@ -13,24 +13,24 @@ const PILLARS = [
     {
         number: '02',
         title: 'Our Solution',
-        description: 'CURA is the world\'s first cross-domain medical safety operating system. Our clinical AI generates side-by-side treatment plans from all three domains while actively blocking dangerous drug-herb interactions ΓÇö always with a licensed doctor in the loop.',
+        description: 'CURA is the world\'s first cross-domain medical safety operating system. Our clinical AI generates side-by-side treatment plans from all three domains while actively blocking dangerous drug-herb interactions — always with a licensed doctor in the loop.',
         stat: '30+',
         statLabel: 'NIH/PubMed-backed interaction rules in v1'
     },
     {
         number: '03',
         title: 'The Data Moat',
-        description: 'Every doctor decision creates training data. Accept, edit, or reject ΓÇö we capture the clinical reasoning. Over time, we build a proprietary medical AI corpus no competitor can replicate without our network of doctors.',
-        stat: 'Γê₧',
+        description: 'Every doctor decision creates training data. Accept, edit, or reject — we capture the clinical reasoning. Over time, we build a proprietary medical AI corpus no competitor can replicate without our network of doctors.',
+        stat: '∞',
         statLabel: 'Proprietary training data from every consultation'
     }
 ];
 
 const TEAM_PRINCIPLES = [
-    { icon: '≡ƒö¼', title: 'Research-First', desc: 'Every interaction rule traces back to a PubMed citation or systematic review.' },
-    { icon: '≡ƒæ¿ΓÇìΓÜò∩╕Å', title: 'Doctor-in-the-Loop', desc: 'AI generates. Doctors decide. We never replace clinical judgment.' },
-    { icon: '≡ƒ¢í∩╕Å', title: 'Safety Before Growth', desc: 'We will never ship a feature that compromises patient safety for engagement metrics.' },
-    { icon: '≡ƒîì', title: 'Built for Bharat', desc: 'Designed for India\'s unique pluralistic medical culture ΓÇö and ready to scale globally.' },
+    { icon: '🔬', title: 'Research-First', desc: 'Every interaction rule traces back to a PubMed citation or systematic review.' },
+    { icon: '👨‍⚕️', title: 'Doctor-in-the-Loop', desc: 'AI generates. Doctors decide. We never replace clinical judgment.' },
+    { icon: '🛡️', title: 'Safety Before Growth', desc: 'We will never ship a feature that compromises patient safety for engagement metrics.' },
+    { icon: '🌍', title: 'Built for Bharat', desc: 'Designed for India\'s unique pluralistic medical culture — and ready to scale globally.' },
 ];
 
 const ROADMAP = [
@@ -58,7 +58,7 @@ export default function AboutPage() {
                     </h1>
                     <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
                         CURA exists because no one should have to choose between modern medicine,
-                        ancient wisdom, and gentle healing ΓÇö and no one should be harmed by combining them unknowingly.
+                        ancient wisdom, and gentle healing — and no one should be harmed by combining them unknowingly.
                     </p>
                 </div>
             </section>
@@ -122,11 +122,11 @@ export default function AboutPage() {
                     <div className="bg-[var(--navy)] rounded-2xl p-8 text-white font-mono text-sm">
                         <p className="text-green-400 mb-2">{'// CURA System Architecture'}</p>
                         <div className="space-y-1.5 text-blue-200">
-                            <p>Next.js Frontend <span className="text-gray-400">ΓåÆ</span> <span className="text-yellow-300">Clinical UI + Dashboard</span></p>
-                            <p>Next.js API Routes <span className="text-gray-400">ΓåÆ</span> <span className="text-yellow-300">Auth + Appointments + User Data</span></p>
-                            <p>FastAPI Microservice <span className="text-gray-400">ΓåÆ</span> <span className="text-green-300">OCR + NER + Interaction AI + Moderation</span></p>
-                            <p>PostgreSQL <span className="text-gray-400">ΓåÆ</span> <span className="text-blue-300">Patient Records (v3)</span></p>
-                            <p>BioBERT / ClinicalBERT <span className="text-gray-400">ΓåÆ</span> <span className="text-purple-300">NER Model (when dataset provided)</span></p>
+                            <p>Next.js Frontend <span className="text-gray-400">→</span> <span className="text-yellow-300">Clinical UI + Dashboard</span></p>
+                            <p>Next.js API Routes <span className="text-gray-400">→</span> <span className="text-yellow-300">Auth + Appointments + User Data</span></p>
+                            <p>FastAPI Microservice <span className="text-gray-400">→</span> <span className="text-green-300">OCR + NER + Interaction AI + Moderation</span></p>
+                            <p>PostgreSQL <span className="text-gray-400">→</span> <span className="text-blue-300">Patient Records (v3)</span></p>
+                            <p>BioBERT / ClinicalBERT <span className="text-gray-400">→</span> <span className="text-purple-300">NER Model (when dataset provided)</span></p>
                         </div>
                     </div>
                 </div>
@@ -150,10 +150,10 @@ export default function AboutPage() {
                                         background: r.status === 'live' ? 'var(--hc-green)' : r.status === 'building' ? 'var(--med-blue)' : 'var(--gray-200)',
                                         color: r.status === 'planned' ? 'var(--gray-600)' : 'white'
                                     }}>
-                                    {r.status === 'live' ? 'Γ£ô LIVE' : r.status === 'building' ? 'ΓÜí BUILDING' : 'Γùï PLANNED'}
+                                    {r.status === 'live' ? '✓ LIVE' : r.status === 'building' ? '⚡ BUILDING' : '○ PLANNED'}
                                 </span>
                                 <div>
-                                    <span className="text-xs font-semibold text-gray-500">{r.phase} ΓÇö </span>
+                                    <span className="text-xs font-semibold text-gray-500">{r.phase} — </span>
                                     <span className="text-sm text-gray-800">{r.label}</span>
                                 </div>
                             </div>

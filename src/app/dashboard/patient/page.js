@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 import {
     Pill, Clock, CheckCircle, Circle, AlertCircle, TrendingUp,
@@ -23,7 +23,7 @@ export default function PatientDashboard() {
         setTimeout(() => {
             const botMsg = {
                 id: `chat-${Date.now() + 1}`, role: 'assistant',
-                content: 'I hear you, and your feelings are completely valid. Remember, recovery is not a straight line ΓÇö small steps count. How about we reflect on one positive thing from today? ≡ƒÆÖ',
+                content: 'I hear you, and your feelings are completely valid. Remember, recovery is not a straight line — small steps count. How about we reflect on one positive thing from today? 💙',
                 timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             };
             setChatMessages(prev => [...prev, botMsg]);
@@ -44,12 +44,12 @@ export default function PatientDashboard() {
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                     <div>
                         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Welcome back, {patient.name}</h1>
-                        <p className="text-slate-500 text-sm mt-1">Your health dashboard ┬╖ {new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                        <p className="text-slate-500 text-sm mt-1">Your health dashboard · {new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <span className="px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-semibold border border-red-200">≡ƒ⌐╕ {patient.bloodGroup}</span>
+                        <span className="px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-semibold border border-red-200">🩸 {patient.bloodGroup}</span>
                         {patient.allergies.map(a => (
-                            <span key={a} className="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold border border-amber-200">ΓÜá {a}</span>
+                            <span key={a} className="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold border border-amber-200">⚠ {a}</span>
                         ))}
                     </div>
                 </div>
@@ -179,7 +179,7 @@ export default function PatientDashboard() {
                                         {rem.time}
                                     </span>
                                     <span className={`text-xs font-semibold ${rem.taken ? 'text-emerald-600' : 'text-slate-400'}`}>
-                                        {rem.taken ? 'Γ£ô Taken' : 'Pending'}
+                                        {rem.taken ? '✓ Taken' : 'Pending'}
                                     </span>
                                 </div>
                             ))}

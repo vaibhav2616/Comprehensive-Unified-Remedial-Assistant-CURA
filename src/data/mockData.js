@@ -1,4 +1,4 @@
-﻿// ΓöÇΓöÇΓöÇ CURA Mock Data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── CURA Mock Data ─────────────────────────────────────────────
 
 export const DOMAINS = {
   ALLOPATHY: 'Allopathy',
@@ -12,7 +12,7 @@ export const DOMAIN_COLORS = {
   [DOMAINS.HOMEOPATHY]: { bg: 'var(--homeo)', light: 'var(--homeo-light)', text: '#ffffff', gradient: 'none' },
 };
 
-// ΓöÇΓöÇΓöÇ Doctors ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Doctors ────────────────────────────────────────────────────
 
 export const doctors = [
   // Allopathy
@@ -34,7 +34,7 @@ export const doctors = [
   { id: 'doc-12', name: 'Dr. Ritu Malhotra', domain: DOMAINS.HOMEOPATHY, specialization: 'Dermatological Homeopathy', rating: 4.6, cost: 600, avatar: '/avatars/doc12.png', experience: 11, location: 'Ahmedabad', availability: ['Wed 10-1 PM', 'Fri 10-1 PM'], bio: 'Skin and allergy specialist using potentized remedies.' },
 ];
 
-// ΓöÇΓöÇΓöÇ Sample Prescription (Mock OCR Output) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Sample Prescription (Mock OCR Output) ──────────────────────
 
 export const samplePrescription = {
   patientName: 'Aryan Mehta',
@@ -49,7 +49,7 @@ export const samplePrescription = {
   ],
 };
 
-// ΓöÇΓöÇΓöÇ Drug Interaction Rules ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Drug Interaction Rules ─────────────────────────────────────
 
 export const drugInteractions = [
   {
@@ -108,13 +108,13 @@ export const drugInteractions = [
   },
 ];
 
-// ΓöÇΓöÇΓöÇ Community Posts ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Community Posts ────────────────────────────────────────────
 
 export const communityPosts = [
   {
     id: 'post-1',
     author: 'Sneha R.',
-    avatar: '≡ƒºæΓÇìΓÜò∩╕Å',
+    avatar: '🧑‍⚕️',
     timestamp: '2026-08-30T14:30:00Z',
     content: 'Started Panchakarma therapy last month for my chronic fatigue. The difference in energy levels is remarkable! My Vaidya customized the treatment based on my Prakriti assessment.',
     likes: 42,
@@ -124,7 +124,7 @@ export const communityPosts = [
   {
     id: 'post-2',
     author: 'Amit K.',
-    avatar: '≡ƒæ¿',
+    avatar: '👨',
     timestamp: '2026-08-29T09:15:00Z',
     content: 'My grandfather cured his diabetes completely by drinking bitter gourd juice mixed with neem leaves every morning. Stop taking insulin and try this natural remedy instead!',
     likes: 3,
@@ -134,7 +134,7 @@ export const communityPosts = [
   {
     id: 'post-3',
     author: 'Dr. Meera S.',
-    avatar: '≡ƒæ⌐ΓÇìΓÜò∩╕Å',
+    avatar: '👩‍⚕️',
     timestamp: '2026-08-28T16:45:00Z',
     content: 'Reminder: Always inform your allopathic doctor if you are taking herbal supplements. Cross-domain interactions are real and can be dangerous. CURA\'s interaction checker is a great first step!',
     likes: 128,
@@ -144,7 +144,7 @@ export const communityPosts = [
   {
     id: 'post-4',
     author: 'Priya M.',
-    avatar: '≡ƒæ⌐',
+    avatar: '👩',
     timestamp: '2026-08-27T11:00:00Z',
     content: 'Has anyone tried constitutional homeopathy for anxiety? I\'ve been on Ignatia 200C for two weeks and feeling calmer. Would love to hear others\' experiences.',
     likes: 31,
@@ -154,7 +154,7 @@ export const communityPosts = [
   {
     id: 'post-5',
     author: 'Rahul T.',
-    avatar: '≡ƒºæ',
+    avatar: '🧑',
     timestamp: '2026-08-26T08:20:00Z',
     content: 'You don\'t need blood pressure medication! Just take 10 drops of Rauwolfia mother tincture three times daily. It\'s completely natural and has no side effects whatsoever.',
     likes: 5,
@@ -164,7 +164,7 @@ export const communityPosts = [
   {
     id: 'post-6',
     author: 'Kavita D.',
-    avatar: '≡ƒæ⌐ΓÇì≡ƒª▒',
+    avatar: '👩‍🦱',
     timestamp: '2026-08-25T19:30:00Z',
     content: 'Completed my 6-month cardiac rehab program with Dr. Sharma. Combining prescribed medication with gentle yoga (approved by my cardiologist) has been transformative. Always consult your doctor first!',
     likes: 87,
@@ -173,7 +173,7 @@ export const communityPosts = [
   },
 ];
 
-// ΓöÇΓöÇΓöÇ Patient Dashboard Data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Patient Dashboard Data ────────────────────────────────────
 
 export const patientDashboardData = {
   patient: { name: 'Aryan Mehta', age: 42, bloodGroup: 'B+', allergies: ['Penicillin', 'Sulfa drugs'] },
@@ -196,7 +196,7 @@ export const patientDashboardData = {
   ],
 };
 
-// ΓöÇΓöÇΓöÇ Doctor Dashboard Data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Doctor Dashboard Data ──────────────────────────────────────
 
 export const doctorDashboardData = {
   doctor: { name: 'Dr. Priya Sharma', specialization: 'Cardiologist', domain: DOMAINS.ALLOPATHY },
@@ -215,7 +215,7 @@ export const doctorDashboardData = {
   ],
 };
 
-// ΓöÇΓöÇΓöÇ Appointments ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ─── Appointments ───────────────────────────────────────────────
 
 export const appointments = [
   { id: 'apt-1', doctorId: 'doc-1', patientName: 'Aryan Mehta', date: '2026-09-03', time: '10:30 AM', type: 'offline', status: 'confirmed', domain: DOMAINS.ALLOPATHY },

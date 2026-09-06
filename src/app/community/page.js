@@ -1,13 +1,48 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 import {
     MessageSquare, ThumbsUp, MessageCircle, Shield, AlertTriangle,
     CheckCircle, Send, Users, Filter
 } from 'lucide-react';
 import { communityPosts } from '@/data/mockData';
+import { useApp } from '@/context/AppContext';
 
 export default function CommunityPage() {
+    const { currentUser } = useApp();
+    const [posts, setPosts] = useState(communityPosts);
     const [newPost, setNewPost] = useState('');
+
+    const handlePost = () => {
+        const trimmed = newPost.trim();
+        if (!trimmed) return;
+
+        const createdPost = {
+            id: `post-${Date.now()}`,
+            author: currentUser?.name || 'Aryan Mehta',
+            avatar: currentUser?.role === 'doctor' ? '👨‍⚕️' : '🧑',
+            timestamp: new Date().toISOString(),
+            content: trimmed,
+            likes: 0,
+            comments: 0,
+            moderation: {
+                status: 'safe',
+                label: 'Verified Safe',
+                reason: 'Personal experience shared without unverified medical claims.'
+            },
+            isNew: true
+        };
+
+        setPosts(prev => [createdPost, ...prev]);
+        setNewPost('');
+    };
+
+    const handleLike = (id) => {
+        setPosts(prev => prev.map(p => p.id === id ? { ...p, likes: p.likes + 1 } : p));
+    };
+
+    const userInitials = currentUser?.name
+        ? currentUser.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+        : 'AM';
 
     return (
         <div className="min-h-screen bg-slate-50 py-12">
@@ -31,12 +66,17 @@ export default function CommunityPage() {
                 <div className="bg-white rounded-2xl border border-slate-200 p-5 mb-8 shadow-sm">
                     <div className="flex items-start gap-3">
                         <div className="w-10 h-10 rounded-full bg-[var(--med-blue)] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                            AM
+                            {userInitials}
                         </div>
                         <div className="flex-1">
                             <textarea
                                 value={newPost}
                                 onChange={(e) => setNewPost(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                                        handlePost();
+                                    }
+                                }}
                                 placeholder="Share your experience, ask a question, or support others..."
                                 rows={3}
                                 className="w-full px-0 py-1 border-0 focus:ring-0 text-sm text-slate-700 placeholder-slate-400 resize-none outline-none"
@@ -45,7 +85,12 @@ export default function CommunityPage() {
                                 <p className="text-[10px] text-[var(--gray-400)] flex items-center gap-1">
                                     <Shield className="w-3 h-3 text-[var(--med-blue)]" /> Posts are monitored for medical safety
                                 </p>
-                                <button className="flex items-center gap-2 px-5 py-2 bg-[var(--med-blue)] text-white rounded-md text-sm font-medium hover:bg-[var(--med-blue-2)] transition-colors">
+                                <button
+                                    type="button"
+                                    onClick={handlePost}
+                                    disabled={!newPost.trim()}
+                                    className="flex items-center gap-2 px-5 py-2 bg-[var(--med-blue)] text-white rounded-md text-sm font-medium hover:bg-[var(--med-blue-2)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
                                     <Send className="w-4 h-4" />
                                     Post
                                 </button>
@@ -56,8 +101,13 @@ export default function CommunityPage() {
 
                 {/* Posts Feed */}
                 <div className="space-y-5">
-                    {communityPosts.map(post => (
-                        <div key={post.id} className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+                    {posts.map(post => (
+                        <div
+                            key={post.id}
+                            className={`bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow ${
+                                post.isNew ? 'animate-fade-up ring-1 ring-[var(--med-blue)]/30' : 'animate-fade-in'
+                            }`}
+                        >
                             {/* Moderation Banner */}
                             <div className={`px-5 py-2 flex items-center gap-2 text-xs font-semibold
                 ${post.moderation.status === 'safe'
@@ -106,10 +156,14 @@ export default function CommunityPage() {
 
                                 {/* Actions */}
                                 <div className="flex items-center gap-6 text-xs text-slate-400">
-                                    <button className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+                                    <button
+                                        type="button"
+                                        onClick={() => handleLike(post.id)}
+                                        className="flex items-center gap-1.5 hover:text-blue-600 transition-colors"
+                                    >
                                         <ThumbsUp className="w-3.5 h-3.5" /> {post.likes}
                                     </button>
-                                    <button className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+                                    <button type="button" className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
                                         <MessageCircle className="w-3.5 h-3.5" /> {post.comments} comments
                                     </button>
                                 </div>
@@ -121,19 +175,3 @@ export default function CommunityPage() {
         </div>
     );
 }
-
-// commit-touch: 2026-08-16 14:00:00
-
-// commit-touch: 2026-08-30 10:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-16 14:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-30 10:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-16 14:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-30 10:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-16 14:00:00
-
-// commit-touch: shubhamsoni1234 2026-08-30 10:00:00

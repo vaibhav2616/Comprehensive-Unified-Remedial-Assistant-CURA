@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState, useRef } from 'react';
 import { useApp } from '@/context/AppContext';
 import {
@@ -54,7 +54,7 @@ export default function PrescriptionPage() {
                             <FileText className="w-4 h-4" />
                             Browse Files
                         </div>
-                        <p className="text-xs text-slate-400 mt-4">≡ƒöÆ Your prescription data is encrypted and never stored permanently</p>
+                        <p className="text-xs text-slate-400 mt-4">🔒 Your prescription data is encrypted and never stored permanently</p>
                     </div>
                 )}
 
@@ -94,7 +94,7 @@ export default function PrescriptionPage() {
                     </div>
                 )}
 
-                {/* Done ΓÇö Show Extracted Medications */}
+                {/* Done — Show Extracted Medications */}
                 {uploadState === 'done' && activePrescription && (
                     <div className="animate-fade-up">
                         {/* Success header */}

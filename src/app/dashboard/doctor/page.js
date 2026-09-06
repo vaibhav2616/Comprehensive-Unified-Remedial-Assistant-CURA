@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import {
     Users, Clock, CheckCircle, AlertCircle, TrendingUp,
     Calendar, ClipboardList, Activity, ChevronRight,
@@ -19,7 +19,7 @@ export default function DoctorDashboard() {
                             <Stethoscope className="w-7 h-7 text-blue-600" />
                             {doctor.name}
                         </h1>
-                        <p className="text-slate-500 text-sm mt-1">{doctor.specialization} ┬╖ {doctor.domain}</p>
+                        <p className="text-slate-500 text-sm mt-1">{doctor.specialization} · {doctor.domain}</p>
                     </div>
                     <span className="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl text-sm font-semibold border border-blue-200">
                         {new Date().toLocaleDateString('en-IN', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
@@ -53,7 +53,7 @@ export default function DoctorDashboard() {
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-2 mb-1">
                                             <p className="font-semibold text-slate-800 text-sm truncate">{patient.name}</p>
-                                            <span className="text-xs text-slate-400">┬╖ {patient.age}y</span>
+                                            <span className="text-xs text-slate-400">· {patient.age}y</span>
                                             <StatusBadge status={patient.status} />
                                         </div>
                                         <p className="text-xs text-slate-400 mb-2">{patient.condition}</p>
